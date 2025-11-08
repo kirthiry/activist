@@ -1,16 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { fireEvent, screen, waitFor } from "@testing-library/vue";
 import { describe, expect, it } from "vitest";
-<<<<<<< HEAD
 import { defineComponent, ref } from "vue";
-=======
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
 
 import FormTextInput from "~/components/form/text/FormTextInput.vue";
 
 import render from "../../../render";
 
-<<<<<<< HEAD
 // Test wrapper to enable v-model for correct reactivity in tests.
 const TestWrapper = defineComponent({
   components: { FormTextInput },
@@ -34,17 +30,11 @@ const TestWrapper = defineComponent({
 function expectNormalLabel(label: HTMLElement) {
   expect(label.className, "Label should be normal size").toMatch(
     "translate-y-[0.6rem] pl-[12px]"
-=======
-function expectNormalLabel(label: HTMLElement) {
-  expect(label.className, "Label should be normal size").toMatch(
-    "translate-y-[1.125rem] pl-[12px]"
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
   );
 }
 
 function expectShrunkLabel(label: HTMLElement) {
   expect(label.className, "Label should be shrunk").toMatch(
-<<<<<<< HEAD
     "translate-x-4 translate-y-[-0.5rem] text-sm text-distinct-text"
   );
 }
@@ -63,60 +53,28 @@ function expectShrunkLegend(legend: HTMLElement) {
     Array.from(legend.classList),
     "Hidden legend should be shrunk"
   ).not.toContain("max-w-[0.01px]");
-=======
-    "translate-x-4 text-sm text-distinct-text"
-  );
-}
-
-function expectNormalLegend(legend: HTMLElement) {
-  expect(legend.classList, "Hidden legend should be normal size").not.toContain(
-    "max-w-[0.01px]"
-  );
-}
-
-function expectShrunkLegend(legend: HTMLElement) {
-  expect(legend.className, "Hidden legend should be shrunk").toMatch(
-    "max-w-[0.01px]"
-  );
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
 }
 
 describe("FormTextInput", () => {
   it("shrinks label when focused", async () => {
-<<<<<<< HEAD
     await render(TestWrapper, {
-=======
-    await render(FormTextInput, {
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
       props: {
         id: "test",
         label: "test focus",
       },
     });
 
-<<<<<<< HEAD
     let label = screen.getByText("test focus", { selector: "label" });
-=======
-    let label = screen.getByText("test focus");
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
     expectNormalLabel(label);
 
     let legend = screen.getByTestId("hidden-legend");
     expectNormalLegend(legend);
 
-<<<<<<< HEAD
     const input = screen.getByLabelText("test focus", { selector: "input" });
     await fireEvent.focus(input);
 
     await waitFor(() => {
       label = screen.getByText("test focus", { selector: "label" });
-=======
-    const input = screen.getByLabelText("test focus");
-    await fireEvent.focus(input);
-
-    await waitFor(async () => {
-      label = screen.getByText("test focus");
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
       expectShrunkLabel(label);
 
       legend = screen.getByTestId("hidden-legend");
@@ -125,18 +83,13 @@ describe("FormTextInput", () => {
   });
 
   it("expands label when empty and blurred", async () => {
-<<<<<<< HEAD
     await render(TestWrapper, {
-=======
-    await render(FormTextInput, {
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
       props: {
         id: "test",
         label: "test blur",
       },
     });
 
-<<<<<<< HEAD
     const input = screen.getByLabelText("test blur", { selector: "input" });
     await fireEvent.focus(input);
     await fireEvent.update(input, "text"); // update() instead of input() for v-model compatibility
@@ -144,15 +97,6 @@ describe("FormTextInput", () => {
 
     await waitFor(() => {
       const label = screen.getByText("test blur", { selector: "label" });
-=======
-    const input = screen.getByLabelText("test blur");
-    await fireEvent.focus(input);
-    await fireEvent.input(input, "text");
-    await fireEvent.blur(input);
-
-    await waitFor(async () => {
-      const label = screen.getByText("test blur");
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
       expectShrunkLabel(label);
 
       const legend = screen.getByTestId("hidden-legend");
@@ -160,7 +104,6 @@ describe("FormTextInput", () => {
     });
 
     await fireEvent.focus(input);
-<<<<<<< HEAD
     await fireEvent.update(input, ""); // update() to clear
     await fireEvent.blur(input);
 
@@ -170,17 +113,6 @@ describe("FormTextInput", () => {
 
       const legend = screen.getByTestId("hidden-legend");
       expectNormalLegend(legend);
-=======
-    await fireEvent.input(input, "");
-    await fireEvent.blur(input);
-
-    await waitFor(async () => {
-      const label = screen.getByText("test blur");
-      expectNormalLabel(label);
-
-      const legend = screen.getByTestId("hidden-legend");
-      expectShrunkLegend(legend);
->>>>>>> 4202843e (renamed from .spect.ts to .spec.ts)
     });
   });
 
